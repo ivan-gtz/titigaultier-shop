@@ -1,0 +1,68 @@
+
+
+.swiper-slide {
+  
+  /* Center slide text vertically */
+  display: flex;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.swiper {
+  width: 100%;
+  height: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+
+.mySwiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// flecas de navegación
+.swiper-container .swiper-button-next, .swiper-container .swiper-button-prev {
+  color: #d1d5db; /* O el color que prefieras */
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #d1d5db !important;
+}
+
+.swiper-button-next::after, .swiper-button-prev::after {
+  font-size: 30px !important; /* Ajusta esto al tamaño deseado */
+}
+
+.swiper-pagination-bullet {
+  background: black;
+}
