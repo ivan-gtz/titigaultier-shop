@@ -1,5 +1,6 @@
 'use client';
 import { QuantitySelector, SizeSelector } from "@/components"
+import { Button } from "@/components/ui/ui-shadcn/button";
 import { parFont } from "@/config/fonts";
 import type { CartProduct, Product, Size } from "@/interfaces"
 import { useCartStore } from "@/store";
@@ -59,12 +60,13 @@ export const AddToCart = ({ product }: Props) => {
         onQuantityChanged={setQuantity}
       />
       {/* Button */}
-      <button
+      <Button
         onClick={addToCart}
-        className={`${ parFont.className } btn-primary my-5 text-sm font-medium`}
+        size="lg"
+        className={`${ parFont.className } my-5 text-sm font-medium`}
       >
         AGREGAR AL CARRITO
-      </button>
+      </Button>
     </>
   )
 }
