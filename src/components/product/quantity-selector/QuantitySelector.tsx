@@ -1,4 +1,5 @@
 'use client'
+import { parFont } from "@/config/fonts";
 import { useState } from "react";
 import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 
@@ -25,7 +26,7 @@ export const QuantitySelector = ({ quantity, onQuantityChanged, className, size 
             <button onClick={ () => onValueChange( -1 )}>
                 <IoRemoveCircleOutline size={ size }/>
             </button>
-            <span className="w-12  mx-3 px-5 bg-gray-100 flex items-center justify-center rounded-md">
+            <span className={`${ parFont.className } w-12  mx-3 px-5 bg-gray-100 flex items-center justify-center rounded-md`}>
                 { quantity }
             </span>
             <button onClick={ () => onValueChange( +1 )}>

@@ -1,12 +1,16 @@
 'use client'
 import { titleFont } from "@/config/fonts"
 import { useCartStore, useUiStore } from "@/store";
+import clsx from "clsx";
 import Link from "next/link"
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoCartOutline, IoSearchOutline } from "react-icons/io5"
 
 export const TopMenu = () => {
 
+    const pathname = usePathname();
+    console.log(pathname)
     const openSideMenu = useUiStore(state => state.openSideMenu);
     const totalItemsInCart = useCartStore(state => state.getTotalItems());
 
@@ -15,7 +19,7 @@ export const TopMenu = () => {
     useEffect(() => {
         setLoaded(true);
     }, [])
-    
+
 
     return (
         <nav className="fixed top-0 z-40 bg-white flex px-5 justify-between items-center w-full">
@@ -32,20 +36,35 @@ export const TopMenu = () => {
             {/* Center Menu */}
             <div className="hidden sm:block">
                 <Link
-                    className="m-2 p-2 rounded-md transition-all hover:bg-gray-100 text-sm font-medium"
                     href="/gender/men"
+                    className={clsx(
+                        "m-2 p-2 rounded-lg transition-all hover:bg-gray-100 text-sm font-normal",
+                        {
+                            'bg-black text-white hover:bg-gray-950 transition-all': pathname === '/gender/men'
+                        }
+                    )}
                 >
                     Hombres
                 </Link>
                 <Link
-                    className="m-2 p-2 rounded-md transition-all hover:bg-gray-100 text-sm font-medium"
                     href="/gender/women"
+                    className={clsx(
+                        "m-2 p-2 rounded-lg transition-all hover:bg-gray-100 text-sm font-normal",
+                        {
+                            'bg-black text-white hover:bg-gray-950 transition-all': pathname === '/gender/women'
+                        }
+                    )}
                 >
                     Mujeres
                 </Link>
                 <Link
-                    className="m-2 p-2 rounded-md transition-all hover:bg-gray-100 text-sm font-medium"
                     href="/gender/kid"
+                    className={clsx(
+                        "m-2 p-2 rounded-lg transition-all hover:bg-gray-100 text-sm font-normal",
+                        {
+                            'bg-black text-white hover:bg-gray-950 transition-all': pathname === '/gender/kid'
+                        }
+                    )}
                 >
                     Niños
                 </Link>
@@ -55,8 +74,8 @@ export const TopMenu = () => {
                 <Link href="/search" className="mx-2">
                     <IoSearchOutline className="w-5 h-5" />
                 </Link>
-                <Link 
-                    href={((totalItemsInCart === 0 ) && loaded ) ? "/empty" : "/cart"} 
+                <Link
+                    href={((totalItemsInCart === 0) && loaded) ? "/empty" : "/cart"}
                     className="mx-2">
                     <div className="relative">
                         {

@@ -1,3 +1,4 @@
+import { parFont } from "@/config/fonts";
 import { Size } from "@/interfaces"
 import clsx from "clsx";
 
@@ -14,7 +15,7 @@ export const SizeSelector = ({ selectedSize, availableSizes, onSizeChange }: Pro
 
     return (
         <div className="my-5">
-            <h3 className="text-base mb-4 font-semibold text-slate-900">Tallas disponibles</h3>
+            <h3 className={`${ parFont.className } text-lg mb-4 font-semibold text-slate-900`}>Tallas disponibles</h3>
             <div className="flex-initial flex text-sm">
                 {
                     availableSizes.map(size => (
@@ -23,7 +24,7 @@ export const SizeSelector = ({ selectedSize, availableSizes, onSizeChange }: Pro
                             onClick={ () => onSizeChange(size) }
                             className={
                                 clsx(
-                                    "mr-1 rounded-xl text-slate-700 h-10 w-10 hover:border transition-all",
+                                    `${ parFont.className } text-base mr-1 rounded-xl text-slate-700 h-10 w-10 hover:border transition-all font-medium`,
                                     {
                                         'bg-black text-white border font-semibold': size === selectedSize
                                     }

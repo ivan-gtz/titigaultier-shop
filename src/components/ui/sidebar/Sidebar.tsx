@@ -114,21 +114,24 @@ export const Sidebar = () => {
               {/* Line Separator */}
               <div className="w-full h-px bg-gray-200 my-8" />
               <Link
-                href="/"
+                href="/admin/products"
+                onClick={closeMenu}
                 className="flex items-center mt-5 p-2 hover:bg-gray-100 rounded transition-all"
               >
                 <IoShirtOutline size={20} />
                 <span className="ml-3 text-base">Productos</span>
               </Link>
               <Link
-                href="/"
+                href="/admin/orders"
+                onClick={closeMenu}
                 className="flex items-center mt-5 p-2 hover:bg-gray-100 rounded transition-all"
               >
                 <IoTicketOutline size={20} />
                 <span className="ml-3 text-base">Ordenes</span>
               </Link>
               <Link
-                href="/"
+                href="/admin/users"
+                onClick={closeMenu}
                 className="flex items-center mt-5 p-2 hover:bg-gray-100 rounded transition-all"
               >
                 <IoPeopleOutline size={20} />

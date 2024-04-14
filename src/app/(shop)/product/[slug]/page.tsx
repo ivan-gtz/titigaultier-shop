@@ -2,7 +2,7 @@ export const revalidate = 604800; // 7 dias
 
 import { getProductBySlug } from "@/actions";
 import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector, SizeSelector, StockLabel } from "@/components";
-import { titleFont } from "@/config/fonts";
+import { parFont, titleFont } from "@/config/fonts";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { AddToCart } from "./ui/AddToCart";
@@ -67,16 +67,16 @@ export default async function ProductBySlougPage({ params }: Props) {
           />
         </div>
         <div className="col-span-5 px-5 bg-blue-100 pt-2 md:pt-0">
-          <h1 className={` ${titleFont.className} antialiased font-bold text-xl`}>
+          <h1 className={` ${parFont.className} antialiased font-black text-2xl`}>
             {product.title}
           </h1>
           <StockLabel slug={slug} />
 
-          <p className="text-lg mb-5">${product.price}</p>
+          <p className={`${ parFont.className } text-lg mb-5`}>${product.price}</p>
           <AddToCart product={product} />
           {/* Descripción */}
-          <h3 className="font-bold text-sm">Descripción</h3>
-          <p className="font-light">
+          <h3 className={`${ parFont.className } font-bold text-base`}>Descripción</h3>
+          <p className={` ${ parFont.className } font-light text-base`}>
             {product.description}
           </p>
         </div>

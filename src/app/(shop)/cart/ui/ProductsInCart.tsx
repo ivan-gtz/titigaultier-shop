@@ -1,8 +1,7 @@
 'use client'
 
-import { QuantitySelector } from "@/components";
+import { ProductImage, QuantitySelector } from "@/components";
 import { useCartStore } from "@/store"
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -28,8 +27,8 @@ export const ProductsInCart = () => {
                 productsInCart.map(product => (
                     <div key={`${ product.slug }- ${ product.size }`} className="grid grid-cols-12 gap-1 mb-3 items-start w-full">
                         <div className="col-span-3">
-                            <Image
-                                src={`/products/${ product.image }`}
+                            <ProductImage
+                                src={ product.image }
                                 width={180}
                                 height={180}
                                 className="rounded-md"

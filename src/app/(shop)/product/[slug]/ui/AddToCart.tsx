@@ -1,5 +1,6 @@
 'use client';
 import { QuantitySelector, SizeSelector } from "@/components"
+import { parFont } from "@/config/fonts";
 import type { CartProduct, Product, Size } from "@/interfaces"
 import { useCartStore } from "@/store";
 import { useState } from "react";
@@ -60,9 +61,9 @@ export const AddToCart = ({ product }: Props) => {
       {/* Button */}
       <button
         onClick={addToCart}
-        className="btn-primary my-5"
+        className={`${ parFont.className } btn-primary my-5 text-sm font-medium`}
       >
-        Agregar al carrito
+        AGREGAR AL CARRITO
       </button>
     </>
   )
