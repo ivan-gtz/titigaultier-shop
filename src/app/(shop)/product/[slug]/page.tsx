@@ -66,7 +66,7 @@ export default async function ProductBySlougPage({ params }: Props) {
             className="hidden md:block"
           />
         </div>
-        <div className="col-span-5 px-5 bg-blue-100 pt-2 md:pt-0">
+        <div className="col-span-5 px-5 bg-blue-100 pt-2 md:pt-0">  
           <h1 className={` ${parFont.className} antialiased font-black text-2xl`}>
             {product.title}
           </h1>
