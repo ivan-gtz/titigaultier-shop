@@ -1,5 +1,4 @@
-import { FooterOld, Footer, Sidebar, TopMenu } from "@/components";
-
+import { FooterOld, SlideOverCart,Footer, Sidebar, TopMenu } from "@/components";
 export default function ShopLayout({ children }: {
     children: React.ReactNode;
 }) {
@@ -7,6 +6,7 @@ export default function ShopLayout({ children }: {
         <main className="min-h-screen pt-13 mt-14">
             <TopMenu />
             <Sidebar />
+            <SlideOverCart />
             {/* <div className="px-2 sm:px-10"> */}
             <div>
                 { children }

@@ -1,4 +1,5 @@
 'use client'
+import { parFont } from "@/config/fonts";
 import { Product } from "@/interfaces"
 import Image from "next/image";
 import Link from "next/link";
@@ -26,14 +27,14 @@ export const ProductGridItem = ({ product }: Props) => {
                     onMouseLeave={ () => setDisplayImage(product.images[0]) }
                 />
             </Link>
-            <div className="p-4 flex flex-col">
+            <div className={`${ parFont.className } pt-2 flex flex-col text-base font-medium`}>
                  <Link
                     className="hover:text-blue-700"
                     href={`/product/${ product.slug }`}
                  >
                     { product.title }
                 </Link>
-                <span className="font-bold" >${ product.price }</span>
+                <span className="font-medium" >${ product.price }</span>
             </div>
         </div>
     )

@@ -63,6 +63,7 @@
   font-size: 30px !important; /* Ajusta esto al tamaño deseado */
 }
 
-.swiper-pagination-bullet {
-  background: black;
+/* Establece el color de los puntos de paginación en  */
+.swiper-pagination .swiper-pagination-bullet {
+  background-color: black !important; /* Cambia este color al que desees */
 }

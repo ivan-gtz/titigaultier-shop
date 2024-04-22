@@ -52,7 +52,7 @@ export default async function ProductBySlougPage({ params }: Props) {
       <div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-12 md:gap-3">
         {/* Slideshow */}
 
-        <div className="col-span-7 bg-red-300">
+        <div className="col-span-7">
           {/* Mobile Slideshow */}
           <ProductMobileSlideshow
             images={product.images}
@@ -66,7 +66,7 @@ export default async function ProductBySlougPage({ params }: Props) {
             className="hidden md:block"
           />
         </div>
-        <div className="col-span-5 px-5 bg-blue-100 pt-2 md:pt-0">  
+        <div className="col-span-5 px-5 pt-2 md:pt-0">  
           <h1 className={` ${parFont.className} antialiased font-black text-2xl`}>
             {product.title}
           </h1>

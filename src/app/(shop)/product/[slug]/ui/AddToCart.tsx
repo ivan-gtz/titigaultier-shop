@@ -3,7 +3,7 @@ import { QuantitySelector, SizeSelector } from "@/components"
 import { Button } from "@/components/ui/ui-shadcn/button";
 import { parFont } from "@/config/fonts";
 import type { CartProduct, Product, Size } from "@/interfaces"
-import { useCartStore } from "@/store";
+import { useCartStore, useSlideCartStore } from "@/store";
 import { useState } from "react";
 
 interface Props {
@@ -13,6 +13,7 @@ interface Props {
 export const AddToCart = ({ product }: Props) => {
 
   const addProductToCart = useCartStore( state => state.addProductToCart );
+  const openSlideOver = useSlideCartStore( state => state.openSlideOver );
 
   const [selectedSize, setSelectedSize] = useState<Size | undefined>();
   const [quantity, setQuantity] = useState<number>(1);
@@ -32,7 +33,8 @@ export const AddToCart = ({ product }: Props) => {
       image: product.images[0]
     }
     addProductToCart( cartProduct );
-    //Todo aqui implementar el pop-up del carrito de comppras
+    //Todo aqui implementar el pop-up del carrito de compras
+    openSlideOver();
     setPosted(false);
     setQuantity(1);
     setSelectedSize(undefined);
@@ -65,7 +67,7 @@ export const AddToCart = ({ product }: Props) => {
         size="lg"
         className={`${ parFont.className } my-5 text-sm font-medium`}
       >
-        AGREGAR AL CARRITO
+        AGREGAR A LA CESTA
       </Button>
     </>
   )
