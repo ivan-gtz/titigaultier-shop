@@ -16,14 +16,14 @@ export const TopMenu = () => {
     const openSideMenu = useUiStore(state => state.openSideMenu);
     const totalItemsInCart = useCartStore(state => state.getTotalItems());
 
-
     useEffect(() => {
         setLoaded(true);
     }, [])
 
+    
 
     return (
-        <nav className="fixed top-0 z-40 bg-white flex px-5 justify-between items-center w-full">
+        <nav className="sticky top-0 z-40 bg-white flex px-5 justify-between items-center w-full">
             {/* Logo */}
             <div>
                 <Link
@@ -73,7 +73,7 @@ export const TopMenu = () => {
             {/* Search, Cart, Menú (BsSearch opcional icon)*/}
             <div className="flex items-center">
                 <Link href="/search" className="mx-2">
-                    <BsSearch className="mt-1" size={19}/>
+                    <BsSearch className="mt-1" size={18}/>
                 </Link>
                 <Link
                     href={((totalItemsInCart === 0) && loaded) ? "/empty" : "/cart"}
@@ -86,7 +86,7 @@ export const TopMenu = () => {
                                 </span>
                             )
                         }
-                        <LiaShoppingBagSolid size={26} />
+                        <LiaShoppingBagSolid size={25} />
                     </div>
                 </Link>
                 <button
@@ -95,12 +95,6 @@ export const TopMenu = () => {
                 >
                     Menú
                 </button>
-                {/* <button
-                    className={`${ parFont.className } m-2 p-2 rounded-md transition-all hover:bg-gray-100 text-sm font-medium`}
-                    onClick={openSideMenu}
-                >
-                    Menú
-                </button> */}
             </div>
         </nav>
     )
