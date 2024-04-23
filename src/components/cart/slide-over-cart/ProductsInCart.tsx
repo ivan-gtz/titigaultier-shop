@@ -6,8 +6,6 @@ import { parFont } from "@/config/fonts";
 import { useCartStore } from "@/store";
 import { currencyFormatter } from "@/utils";
 import Link from "next/link";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { IoTrashOutline } from "react-icons/io5";
 import { LiaTrashAlt } from "react-icons/lia";
 
 export const ProductsInCart = () => {

@@ -1,21 +1,21 @@
 'use client'
-import { parFont, titleFont } from "@/config/fonts"
+import { titleFont, parFont } from "@/config/fonts"
 import { useCartStore, useUiStore } from "@/store";
 import clsx from "clsx";
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { IoSearchOutline } from "react-icons/io5"
+import { BsSearch } from "react-icons/bs";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 
 export const TopMenu = () => {
 
+    const [loaded, setLoaded] = useState(false);
     const pathname = usePathname();
     console.log(pathname)
     const openSideMenu = useUiStore(state => state.openSideMenu);
     const totalItemsInCart = useCartStore(state => state.getTotalItems());
 
-    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         setLoaded(true);
@@ -73,7 +73,7 @@ export const TopMenu = () => {
             {/* Search, Cart, Menú (BsSearch opcional icon)*/}
             <div className="flex items-center">
                 <Link href="/search" className="mx-2">
-                    <IoSearchOutline className="w-5 h-5 mt-1" />
+                    <BsSearch className="mt-1" size={19}/>
                 </Link>
                 <Link
                     href={((totalItemsInCart === 0) && loaded) ? "/empty" : "/cart"}
@@ -86,7 +86,7 @@ export const TopMenu = () => {
                                 </span>
                             )
                         }
-                        <LiaShoppingBagSolid className="w-6 h-6" />
+                        <LiaShoppingBagSolid size={26} />
                     </div>
                 </Link>
                 <button
@@ -95,6 +95,12 @@ export const TopMenu = () => {
                 >
                     Menú
                 </button>
+                {/* <button
+                    className={`${ parFont.className } m-2 p-2 rounded-md transition-all hover:bg-gray-100 text-sm font-medium`}
+                    onClick={openSideMenu}
+                >
+                    Menú
+                </button> */}
             </div>
         </nav>
     )
