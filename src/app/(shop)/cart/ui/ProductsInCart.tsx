@@ -52,7 +52,7 @@ export const ProductsInCart = () => {
                             <p>${product.price}</p>
                             <button 
                                 onClick={ () => removeProduct( product ) }
-                                className="text-sm text-blue-800 font-semibold"
+                                className="text-sm text-blue-800 font-medium"
                             >
                                 Remover
                             </button>

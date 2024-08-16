@@ -5,23 +5,20 @@ import { logout } from "@/actions"
 import { useUiStore } from "@/store"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
-import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonCircleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5"
-import { LuShirt, LuTicket } from "react-icons/lu";
+import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPersonCircleOutline } from "react-icons/io5"
+import { LuShirt } from "react-icons/lu";
 import { Input } from '../ui-shadcn/input';
 import { BsSearch, BsTicketPerforated } from 'react-icons/bs';
-import { Button, buttonVariants } from '../ui-shadcn/button';
-import { MdAdminPanelSettings, MdOutlineAdminPanelSettings } from "react-icons/md";
+import { Button } from '../ui-shadcn/button';
+import { MdAdminPanelSettings } from "react-icons/md";
 import { parFont } from '@/config/fonts';
 
 export const Sidebar = () => {
-
     const isSideMenuOpen = useUiStore(state => state.isSideMenuOpen);
     const closeMenu = useUiStore(state => state.closeSideMenu);
     const { data: session } = useSession();
     const isAdmin = (session?.user.role === 'admin');
-
     const isAuthenticaed = !!session?.user;
-
     return (
         <Transition.Root show={isSideMenuOpen} as={Fragment}>
             <Dialog as="div" className="fixed inset-0 overflow-y-auto z-50" onClose={closeMenu}>
@@ -36,7 +33,6 @@ export const Sidebar = () => {
                 >
                     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                 </Transition.Child>
-
                 <div className="fixed inset-0 overflow-hidden">
                     <div className="absolute inset-0 overflow-hidden">
                         <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
