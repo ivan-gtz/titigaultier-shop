@@ -15,9 +15,10 @@ export default async function AuthLayout({ children }: {
     return (
 
 
-        <main className="h-screen flex items-center justify-center 
-                        bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">
+        <main className="flex justify-center">
+            <div className="w-full sm:w-[350px] px-10">
                 { children }
+            </div>
         </main>
     );
 }

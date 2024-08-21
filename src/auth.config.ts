@@ -4,7 +4,7 @@ import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import prisma from './lib/prisma';
 import bcryptjs from 'bcryptjs';
-
+import Google from "next-auth/providers/google";
 
 export const authConfig: NextAuthConfig = {
     pages: {
@@ -37,6 +37,10 @@ export const authConfig: NextAuthConfig = {
         }
     },
     providers: [
+        Google({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET
+        }),
         Credentials({
             async authorize(credentials) {
                 const parsedCredentials = z
