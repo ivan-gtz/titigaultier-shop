@@ -8,11 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Input } from "../ui/ui-shadcn/input";
 import { Button } from "../ui/ui-shadcn/button";
-import Link from "next/link";
 import { FormError } from "./FormError";
 import { RegisterSchema } from "@/schemas";
-import { register } from "@/actions/auth/register2";
-import { login } from "@/actions/auth/login2";
+import { register } from "@/actions/auth/register";
+import { login } from "@/actions/auth/login";
 
 export const RegisterForm = () => {
     const [error, setError] = useState<string | undefined>("");
@@ -25,7 +24,7 @@ export const RegisterForm = () => {
             name:""
         }
     });
-    const onSubmit = async( values: z.infer<typeof RegisterSchema>) => {
+    const onSubmit = async( values: z.infer<typeof RegisterSchema> ) => {
         setError("");
         startTransition(() => {
             register(values)

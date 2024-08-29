@@ -22,4 +22,7 @@ export * from './ui/title/Title';
 export * from './providers/Providers';
 export * from './orders/OrderStatus';
 
-export  * from './auth/LoginForm'
+export  * from './auth/LoginForm';
+export  * from './auth/ErrorCard';
+export  * from './auth/ResetForm';
+export  * from './auth/NewPasswordForm';

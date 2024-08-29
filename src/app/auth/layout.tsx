@@ -1,4 +1,4 @@
-import { auth } from "../../auth.config";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
 export default async function AuthLayout({ children }: {
@@ -6,8 +6,7 @@ export default async function AuthLayout({ children }: {
 }) {
 
     const session = await auth();
-
-    if ( session?.user ) {
+    if ( session ) {
         redirect('/')
     }
 

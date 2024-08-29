@@ -12,13 +12,13 @@ import Link from "next/link";
 import { FormError } from "./FormError";
 import { useSearchParams } from "next/navigation";
 import { LoginSchema } from "@/schemas";
-import { login } from "@/actions/auth/login2";
+import { login } from "@/actions/auth/login";
 
 export const LoginForm = () => {
 
     const searchParams = useSearchParams();
     const urlError = searchParams.get("error") === "OAuthAccountNotLinked"
-        ? "Email already in use with different provider!"
+        ? "¡El correo electrónico ya está en uso con otro proveedor!"
         :"";
 
     const [error, setError] = useState<string | undefined>("");
@@ -91,7 +91,7 @@ export const LoginForm = () => {
                                         asChild
                                         className="px-0 font-normal"
                                     >
-                                        <Link href="/">
+                                        <Link href="/auth/reset">
                                             ¿Olvidaste tu contraseña?
                                         </Link>
                                     </Button>

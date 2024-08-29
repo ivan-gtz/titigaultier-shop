@@ -1,30 +1,42 @@
-    'use server'
-import prisma from "@/lib/prisma";
-import bcryptjs from 'bcryptjs';
+'use server';
+import { RegisterSchema } from '@/schemas';
+import bcrypt from 'bcryptjs';
+import * as z from 'zod';
+import { getUserByEmail } from '../user/get-user';
+import { prisma } from '@/lib/prisma';
 
-export const registerUser = async( name: string, email: string, password: string ) => {
+export const register = async( values: z.infer<typeof RegisterSchema> ) => {
+
+    const validatedFields = RegisterSchema.safeParse(values);
+
+    if (!validatedFields.success) {
+        return {
+            error: "Datos no válidos"
+        }
+    }
+
+    const { email, password, name } = validatedFields.data;
+    const hashedPassword = await bcrypt.hashSync(password, 10);
+    const existingUser = await getUserByEmail(email);
+
+    if (existingUser) {
+        return {error: "Este correo ya está en uso"};
+    }
 
     try {
         const user = await prisma.user.create({
             data: {
-                name: name,
-                email:email.toLocaleLowerCase(),
-                password: bcryptjs.hashSync( password ),
-            },
-            select: {
-                id: true,
-                name: true,
-                email: true,
+                name,
+                email: email.toLocaleLowerCase(),
+                password: hashedPassword
             }
-
-        })
+        });
 
         return {
             ok: true,
             user: user,
             message: 'usurio creado'
         }
-        
     } catch (error) {
         console.log(error);
         return {

@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const FormError = ({ message }: Props) => {
-    if (!message) {
+    if ( !message ) {
         return null;
     }
     return (

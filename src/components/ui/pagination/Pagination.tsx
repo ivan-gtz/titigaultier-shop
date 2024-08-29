@@ -32,7 +32,7 @@ export const Pagination = ({ totalPages }: Props) => {
 
     const createPageUrl = ( pageNumber: number | string ) => {
 
-        const params = new URLSearchParams( searchParams );
+        const params = new URLSearchParams( searchParams as any );
         if ( pageNumber === '...') {
             return `${ pathName }?${ params.toString() }`;
         }
@@ -89,7 +89,7 @@ export const Pagination = ({ totalPages }: Props) => {
             <div className="flex items-center justify-between text-sm text-gray-600 font-medium sm:hidden">
                 <Link href={ createPageUrl( currentPage + 1 ) } className="px-4 py-2 border rounded-lg duration-150 hover:bg-gray-50">Anterior</Link>
                 <div className="font-medium">
-                    Page {currentPage} of {totalPages}
+                    Página {currentPage} de {totalPages}
                 </div>
                 <Link href={ createPageUrl( currentPage + 1 ) } className="px-4 py-2 border rounded-lg duration-150 hover:bg-gray-50">Siguiente</Link>
             </div>

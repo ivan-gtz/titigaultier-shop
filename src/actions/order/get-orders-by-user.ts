@@ -1,7 +1,7 @@
 'use server';
 
-import { auth } from "@/auth.config";
-import prisma from "@/lib/prisma";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 
 
 export const getOrderByUser = async() => {

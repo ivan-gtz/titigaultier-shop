@@ -1,70 +1,33 @@
+import bcrypt from 'bcryptjs';
 import type { NextAuthConfig } from 'next-auth';
-import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { z } from 'zod';
-import prisma from './lib/prisma';
-import bcryptjs from 'bcryptjs';
+import { LoginSchema } from './schemas';
 import Google from "next-auth/providers/google";
+import Facebook from "next-auth/providers/facebook"
+import { getUserByEmail } from './actions/user/get-user';
 
-export const authConfig: NextAuthConfig = {
-    pages: {
-        signIn: '/auth/login',
-        newUser: '/auth/new-account',
-    },
-    callbacks: {
-        authorized({ auth, request: { nextUrl } }) {
-            // console.log({auth});
-            // const isLoggedIn = !!auth?.user;
-            // const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-            // if (isOnDashboard) {
-            //     if (isLoggedIn) return true;
-            //     return false; // Redirect unauthenticated users to login page
-            // } else if (isLoggedIn) {
-            //     return Response.redirect(new URL('/dashboard', nextUrl));
-            // }
-            return true;
-        },
-        jwt({ token, user }) {
-            if (user) {
-                token.data = user;
-            }
-            return token;
-        },
-        async session({ session, token, user }) {
-            // console.log({ session, token, user });
-            session.user = token.data as any;
-            return session;
-        }
-    },
+export default {
     providers: [
-        Google({
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET
-        }),
+        Google,
+        Facebook,
         Credentials({
             async authorize(credentials) {
-                const parsedCredentials = z
-                    .object({ email: z.string().email(), password: z.string().min(6) })
-                    .safeParse(credentials);
-
-                if (!parsedCredentials.success) return null;
-
-                const { email, password } = parsedCredentials.data;
-
-                // buscar el correo
-                const user = await prisma.user.findUnique({ where: { email: email.toLocaleLowerCase() } });
-                if (!user) return null;
-
-                // comparar las contraseñas
-                if (!bcryptjs.compareSync(password, user.password)) return null;
-
-                // Regresar el usuario sin el password
-                const { password: _, ...rest } = user;
-                // console.log({rest});
-                return rest;
+                const validatedFields = LoginSchema.safeParse(credentials);
+                console.log(validatedFields.success)
+                if (validatedFields.success) {
+                    const { email, password } = validatedFields.data;
+                    const user = await getUserByEmail(email.toLocaleLowerCase());
+                    if (!user || !user.password) return null;
+                    const passwordsMatch = await bcrypt.compareSync(password, user.password);
+                    if (passwordsMatch) {
+                        const { password: _, ...restUser } = user;
+                        console.log({ restUser });
+                        return restUser;
+                    }
+                }
+                return null;
             },
         }),
     ]
-};
+} satisfies NextAuthConfig
 
-export const { signIn, signOut, auth, handlers } = NextAuth(authConfig);

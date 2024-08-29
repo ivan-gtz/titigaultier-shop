@@ -22,7 +22,7 @@ export const OrderSummary = () => {
                 <span>No. Productos</span>
                 <span className="text-right">{ itemsInCart === 1 ? '1 artículo': `${ itemsInCart } artículos`}</span>
                 <span>Subtotal</span>
-                <span className="text-right">{ currencyFormatter( subTotal )  }</span>
+                <span className="text-right">{ currencyFormatter( subTotal ) }</span>
                 <span>Impuestos (15%)</span>
                 <span className="text-right">{ currencyFormatter( tax )  }</span>
                 <span className="text-lg font-semibold text-slate-900 mt-5">Total:</span>

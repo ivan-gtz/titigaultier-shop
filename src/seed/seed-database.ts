@@ -1,5 +1,5 @@
 import { initialData } from "./seed";
-import prisma from '../lib/prisma';
+import { prisma } from '../lib/prisma';
 import { Size } from "@prisma/client";
 import { countries } from "./seed-countries";
 

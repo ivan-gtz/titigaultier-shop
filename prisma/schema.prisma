@@ -38,17 +38,64 @@ model ProductImage {
   product   Product @relation(fields: [productId], references: [id])
 }
 
+// Model for user authjs
 model User {
   id            String       @id @default(uuid())
   name          String
   email         String       @unique
   emailVerified DateTime?
-  password      String
+  password      String?
   role          Role         @default(user)
   image         String?
+  accounts      Account[]
   Order         Order[]
   userAddress   UserAddress?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model VerificationToken {
+  id      String   @id @default(uuid())
+  email   String
+  token   String
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(uuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+// fin model for user auth.js
 
 model Country {
   id           String         @id @unique

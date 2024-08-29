@@ -1,8 +1,8 @@
 'use server';
 
-import { auth } from "@/auth.config";
+import { auth } from "@/auth";
 import type { Address, Size } from "@/interfaces";
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 interface ProductToOrder {
     productId: string;
