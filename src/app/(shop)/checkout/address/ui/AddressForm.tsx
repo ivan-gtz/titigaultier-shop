@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { deleteUserAddress, setUserAddress } from "@/actions";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components";
 
 type FormInputs = {
     firstName: string;
@@ -178,20 +179,18 @@ export const AddressForm = ({countries , userStoredAddress = {}} : Props) => {
                 </div>
 
 
-                <button
+                <Button
                     disabled={ !isValid }
-                    // href='/checkout'
                     type="submit"
-                    // className="btn-primary flex w-full sm:w-1/2 justify-center "
+                    size="lg"
                     className={clsx(
                         {
-                            'btn-primary': isValid,
                             'btn-disabled': !isValid,
                         }
                     )}
                 >
                     Siguiente
-                </button>
+                </Button>
             </div>
         </form>
     )

@@ -111,3 +111,16 @@
   .btn-danger {
     @apply bg-red-500 hover:bg-red-700 text-white py-2 px-4 transition-all;
   }
+
+  /* para alinar el footer */
+  .layout-wrapper {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+  .sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white; /* Asegura que tenga un fondo */
+}

@@ -1,6 +1,5 @@
 'use client';
-import { QuantitySelector, SizeSelector } from "@/components"
-import { Button } from "@/components/ui/ui-shadcn/button";
+import { Button, QuantitySelector, SizeSelector } from "@/components"
 import { parFont } from "@/config/fonts";
 import type { CartProduct, Product, Size } from "@/interfaces"
 import { useCartStore, useSlideCartStore } from "@/store";

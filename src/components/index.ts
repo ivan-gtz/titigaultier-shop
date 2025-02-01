@@ -26,3 +26,5 @@ export  * from './auth/LoginForm';
 export  * from './auth/ErrorCard';
 export  * from './auth/ResetForm';
 export  * from './auth/NewPasswordForm';
+
+export  * from './ui/ui-shadcn/button';

@@ -23,7 +23,7 @@ export const TopMenu = () => {
     
 
     return (
-        <nav className="sticky top-0 z-40 bg-white flex px-5 justify-between items-center w-full">
+        <nav className="bg-white flex px-5 justify-between items-center w-full">
             {/* Logo */}
             <div>
                 <Link
@@ -39,7 +39,7 @@ export const TopMenu = () => {
                 <Link
                     href="/gender/men"
                     className={clsx(
-                        `${ parFont.className } m-2 p-2 rounded-lg transition-all hover:bg-gray-100 text-sm font-normal`,
+                        `${ parFont.className } m-1 p-1.5 px-3 rounded-lg transition-all hover:bg-gray-100 text-sm font-medium`,
                         {
                             'bg-black text-white hover:bg-gray-950 transition-all': pathname === '/gender/men'
                         }
@@ -50,7 +50,7 @@ export const TopMenu = () => {
                 <Link
                     href="/gender/women"
                     className={clsx(
-                        `${ parFont.className } m-2 p-2 rounded-lg transition-all hover:bg-gray-100 text-sm font-normal`,
+                        `${ parFont.className } m-1 p-1.5 px-3 rounded-lg transition-all hover:bg-gray-100 text-sm font-medium`,
                         {
                             'bg-black text-white hover:bg-gray-950 transition-all': pathname === '/gender/women'
                         }
@@ -61,7 +61,7 @@ export const TopMenu = () => {
                 <Link
                     href="/gender/kid"
                     className={clsx(
-                        `${ parFont.className } m-2 p-2 rounded-lg transition-all hover:bg-gray-100 text-sm font-normal`,
+                        `${ parFont.className } m-1 p-1.5 px-3 rounded-lg transition-all hover:bg-gray-100 text-sm font-medium`,
                         {
                             'bg-black text-white hover:bg-gray-950 transition-all': pathname === '/gender/kid'
                         }

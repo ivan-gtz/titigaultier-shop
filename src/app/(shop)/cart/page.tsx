@@ -1,9 +1,8 @@
-import { Title } from "@/components";
+import { buttonVariants, Title } from "@/components";
 import Link from "next/link";
 import { ProductsInCart } from "./ui/ProductsInCart";
 import { OrderSummary } from "./ui/OrderSummary";
 import { parFont } from "@/config/fonts";
-import { buttonVariants } from "@/components/ui/ui-shadcn/button";
 
 
 

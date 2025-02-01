@@ -5,6 +5,9 @@ import { prisma } from "./lib/prisma";
 import { getUserById } from "./actions/user/get-user";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+    // todo: quitar esta 2 lineas antes de desplegar en un servidor
+    useSecureCookies: false,
+    trustHost: true,
     pages: {
         signIn: "/auth/login",
         error: "/auth/error",
