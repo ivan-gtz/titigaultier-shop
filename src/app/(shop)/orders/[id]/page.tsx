@@ -6,13 +6,14 @@ import { currencyFormatter } from "@/utils";
 
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 
-export default async function ProductBySlugPage({ params }: Props) {
+export default async function ProductBySlugPage(props: Props) {
+  const params = await props.params;
 
   const { id } = params;
   // todo: llamar el server action

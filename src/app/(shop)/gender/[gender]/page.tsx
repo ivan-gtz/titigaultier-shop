@@ -7,15 +7,17 @@ import { redirect } from "next/navigation";
 
 
 interface Props {
-  params: {
+  params: Promise<{
     gender: string;
-  },
-  searchParams: {
+  }>,
+  searchParams: Promise<{
     page?: string;
-  }
+  }>
 }
 
-export default async function GenderPage({ params , searchParams }: Props) {
+export default async function GenderPage(props: Props) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
 
   const { gender } = params;
   const page = searchParams.page ? parseInt( searchParams.page ) : 1;

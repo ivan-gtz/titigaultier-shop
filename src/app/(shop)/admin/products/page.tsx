@@ -11,12 +11,13 @@ import { redirect } from "next/navigation";
 import { IoCardOutline } from "react-icons/io5";
 
 interface Props {
-  searchParams: {
+  searchParams: Promise<{
     page?: string;
-  };
+  }>;
 }
 
-export default async function OrdersPage({ searchParams }: Props) {
+export default async function OrdersPage(props: Props) {
+  const searchParams = await props.searchParams;
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
 
   const { products, currentPage, totalPages } =
