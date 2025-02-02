@@ -50,7 +50,7 @@
   object-fit: cover;
 }
 
-// flecas de navegación
+
 .swiper-container .swiper-button-next, .swiper-container .swiper-button-prev {
   color: #d1d5db; /* O el color que prefieras */
 }
