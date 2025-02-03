@@ -22,7 +22,7 @@ export const ProductGridItem = ({ product }: Props) => {
                 <Image
                     src={`/products/${displayImage}`}
                     alt={product.title}
-                    className="w.full object-cover rounded-lg drop-shadow-sm hover:drop-shadow hover:duration-150"
+                    className="w.full object-cover rounded-lg drop-shadow-xs hover:drop-shadow-sm hover:duration-150"
                     width={500}
                     height={500}
                     onMouseEnter={() => setDisplayImage(product.images[1])}
@@ -44,7 +44,7 @@ export const ProductGridItem = ({ product }: Props) => {
                 <Button
                     variant="outline"
                     size="icon"
-                    className="bg-white/80 rounded-full backdrop-blur-sm transition-colors hover:bg-white flex-shrink-0"
+                    className="bg-white/80 rounded-full backdrop-blur-xs transition-colors hover:bg-white shrink-0"
                     onClick={() => setIsLiked(!isLiked)}
                 >
                     <Heart className={`h-4 w-4 ${isLiked ? 'fill-red-500 text-red-500' : 'text-gray-600'}`} />

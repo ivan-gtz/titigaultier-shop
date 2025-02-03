@@ -50,7 +50,7 @@ export const Pagination = ({ totalPages }: Props) => {
 
 
     return (
-        <div className={`${parFont.className} max-w-screen-xl mx-auto mt-12 px-4 text-gray-700 md:px-8 mb-32`}>
+        <div className={`${parFont.className} max-w-(--breakpoint-xl) mx-auto mt-12 px-4 text-gray-700 md:px-8 mb-32`}>
             <div className="hidden items-center justify-between sm:flex" aria-label="Pagination">
                 <Link href={ createPageUrl( currentPage - 1 ) } className="hover:text-gray-900 flex items-center gap-x-2 text-base">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">

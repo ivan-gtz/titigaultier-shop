@@ -14,7 +14,7 @@ export const PageNotFound = () => {
 
                     <Link 
                         href="/" 
-                        className="px-5 inline py-3 text-sm font-medium leading-5 shadow-2xl text-white transition-all duration-400 border border-transparent rounded-lg focus:outline-none bg-cyan-600 active:bg-cyan-600 hover:bg-cyan-700"
+                        className="px-5 inline py-3 text-sm font-medium leading-5 shadow-2xl text-white transition-all duration-400 border border-transparent rounded-lg focus:outline-hidden bg-cyan-600 active:bg-cyan-600 hover:bg-cyan-700"
                     >
                         Regresar al inicio
                     </Link>

@@ -16,7 +16,7 @@ export const ProductsInCart = () => {
             {
                 productsInCart.map(product => (
                     <li key={`${product.slug}- ${product.size}`} className={`${parFont.className} flex py-6`}>
-                        <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                        <div className="h-24 w-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
                             <ProductImage
                                 src={product.image}
                                 alt={product.title}
