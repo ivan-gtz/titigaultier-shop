@@ -1,6 +1,6 @@
 "use client"
 import { Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import { IoCloseOutline } from 'react-icons/io5';
 import { ProductsInCart } from './ProductsInCart'
 import { useCartStore, useSlideCartStore } from '@/store';
@@ -15,9 +15,9 @@ export const SlideOverCart = () => {
     const isSlideOverOpen = useSlideCartStore( state => state.isSlideOverOpen );
     const closeSlideOver = useSlideCartStore( state => state.closeSlideOver );
     return (
-        <Transition.Root show={ isSlideOverOpen } as={Fragment}>
+        <Transition show={ isSlideOverOpen } as={Fragment}>
             <Dialog as="div" className="fixed inset-0 overflow-y-auto z-50" onClose={ closeSlideOver }>
-                <Transition.Child
+                <TransitionChild
                     as={Fragment}
                     enter="ease-in-out duration-500"
                     enterFrom="opacity-0"
@@ -25,14 +25,15 @@ export const SlideOverCart = () => {
                     leave="ease-in-out duration-500"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
+                    unmount={false}
                 >
                     <div className="fixed inset-0 bg-gray-800/75 transition-opacity duration-300" />
-                </Transition.Child>
+                </TransitionChild>
 
                 <div className="fixed inset-0 overflow-hidden">
                     <div className="absolute inset-0 overflow-hidden">
                         <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                            <Transition.Child
+                            <TransitionChild
                                 as={Fragment}
                                 enter="transform transition ease-in-out duration-500 sm:duration-700"
                                 enterFrom="translate-x-full"
@@ -41,11 +42,11 @@ export const SlideOverCart = () => {
                                 leaveFrom="translate-x-0"
                                 leaveTo="translate-x-full"
                             >
-                                <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
+                                <DialogPanel className="pointer-events-auto w-screen max-w-md">
                                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                         <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                                             <div className="flex items-start justify-between">
-                                                <Dialog.Title className={`${ titleFont.className } text-2xl font-semibold text-gray-900`}>Cesta ({ itemsInCart })</Dialog.Title>
+                                                <DialogTitle className={`${ titleFont.className } text-2xl font-semibold text-gray-900`}>Cesta ({ itemsInCart })</DialogTitle>
                                                 <div className="ml-3 flex h-7 items-center">
                                                     <button
                                                         type="button"
@@ -102,12 +103,12 @@ export const SlideOverCart = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </Dialog.Panel>
-                            </Transition.Child>
+                                </DialogPanel>
+                            </TransitionChild>
                         </div>
                     </div>
                 </div>
             </Dialog>
-        </Transition.Root>
+        </Transition>
     )
 }

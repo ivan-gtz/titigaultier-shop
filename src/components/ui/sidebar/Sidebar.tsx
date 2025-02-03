@@ -1,6 +1,6 @@
 'use client'
 import { Fragment } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
 import { logout } from "@/actions"
 import { useUiStore } from "@/store"
 import { useSession } from "next-auth/react"
@@ -20,9 +20,9 @@ export const Sidebar = () => {
     const isAdmin = (session?.user.role === 'admin');
     const isAuthenticaed = !!session?.user;
     return (
-        <Transition.Root show={isSideMenuOpen} as={Fragment}>
+        <Transition show={isSideMenuOpen} as={Fragment}>
             <Dialog as="div" className="fixed inset-0 overflow-y-auto z-50" onClose={closeMenu}>
-                <Transition.Child
+                <TransitionChild
                     as={Fragment}
                     enter="ease-in-out duration-500"
                     enterFrom="opacity-0"
@@ -30,13 +30,14 @@ export const Sidebar = () => {
                     leave="ease-in-out duration-500"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
+                    unmount={false}
                 >
                     <div className="fixed inset-0 bg-gray-800/75 transition-opacity duration-300" />
-                </Transition.Child>
+                </TransitionChild>
                 <div className="fixed inset-0 overflow-hidden">
                     <div className="absolute inset-0 overflow-hidden">
                         <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                            <Transition.Child
+                            <TransitionChild
                                 as={Fragment}
                                 enter="transform transition ease-in-out duration-500 sm:duration-700"
                                 enterFrom="translate-x-full"
@@ -45,7 +46,7 @@ export const Sidebar = () => {
                                 leaveFrom="translate-x-0"
                                 leaveTo="translate-x-full"
                             >
-                                <Dialog.Panel className="pointer-events-auto w-screen max-w-sm">
+                                <DialogPanel className="pointer-events-auto w-screen max-w-sm">
                                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                         <div className={`${ parFont.className } flex-1 overflow-y-auto px-4 py-4 sm:px-6`}>
                                             <div className="flex items-start justify-end">
@@ -184,12 +185,12 @@ export const Sidebar = () => {
                                             }
                                         </div>
                                     </div>
-                                </Dialog.Panel>
-                            </Transition.Child>
+                                </DialogPanel>
+                            </TransitionChild>
                         </div>
                     </div>
                 </div>
             </Dialog>
-        </Transition.Root>
+        </Transition>
     )
 }

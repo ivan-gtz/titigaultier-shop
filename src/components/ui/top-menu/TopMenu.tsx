@@ -6,7 +6,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
-import { LiaShoppingBagSolid } from "react-icons/lia";
+import { LiaHeart, LiaShoppingBagSolid } from "react-icons/lia";
 
 export const TopMenu = () => {
 
@@ -81,12 +81,27 @@ export const TopMenu = () => {
                     <div className="relative">
                         {
                             (loaded && totalItemsInCart > 0) && (
-                                <span className={`${ parFont.className } absolute text-xs rounded-full w-4 h-4 flex items-center justify-center mt-1 font-medium -top-2 -right-2 bg-blue-700 text-white`}>
+                                <span className={`${ parFont.className } absolute text-xs rounded-full w-4 h-4 flex items-center justify-center mt-1 font-medium -top-2 -right-2 bg-black text-white`}>
                                     {totalItemsInCart}
                                 </span>
                             )
                         }
                         <LiaShoppingBagSolid size={25} />
+                    </div>
+                </Link>
+                <Link
+                    href={((totalItemsInCart === 0) && loaded) ? "/whislist" : "/whislist"}
+                    className="mx-2">
+                    <div className="relative">
+                        {
+                            (loaded && totalItemsInCart > 0) && (
+                                <span className={`${ parFont.className } absolute text-xs rounded-full w-4 h-4 flex items-center justify-center mt-1 font-medium -top-2 -right-2 bg-black text-white`}>
+                                    {/* {totalItemsInCart} */}
+                                    4
+                                </span>
+                            )
+                        }
+                        <LiaHeart size={25} />
                     </div>
                 </Link>
                 <button
