@@ -10,7 +10,7 @@ import { Input } from "../ui/ui-shadcn/input";
 import { Button } from "../ui/ui-shadcn/button";
 import Link from "next/link";
 import { FormError } from "./FormError";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { LoginSchema } from "@/schemas";
 import { login } from "@/actions/auth/login";
 
@@ -23,6 +23,9 @@ export const LoginForm = () => {
 
     const [error, setError] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
+
+    const router = useRouter();
+
     const form = useForm<z.infer<typeof LoginSchema>>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
@@ -35,7 +38,12 @@ export const LoginForm = () => {
         startTransition(() => {
             login(values)
                 .then((data) => {
-                    setError(data?.error);
+                    if (data?.ok) {
+                        // router.push("/");
+                        window.location.replace('/');
+                    } else {
+                        setError(data?.error);
+                    }
                 });
         });
     }

@@ -1,7 +1,8 @@
 'use client'
 import { titleFont, parFont } from "@/config/fonts"
-import { useCartStore, useUiStore } from "@/store";
+import { useCartStore, useFavoriteStore, useUiStore } from "@/store";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,9 +11,14 @@ import { LiaHeart, LiaShoppingBagSolid } from "react-icons/lia";
 
 export const TopMenu = () => {
 
+    //refactorizar
+    const { status } = useSession();
+    const favoritesDB = useFavoriteStore(state => state.favorites);
+    const tempFavorites = useFavoriteStore(state => state.tempFavorites);
+    const favorites = status === 'authenticated' ? favoritesDB : tempFavorites;
+
     const [loaded, setLoaded] = useState(false);
     const pathname = usePathname();
-    console.log(pathname)
     const openSideMenu = useUiStore(state => state.openSideMenu);
     const totalItemsInCart = useCartStore(state => state.getTotalItems());
 
@@ -90,14 +96,13 @@ export const TopMenu = () => {
                     </div>
                 </Link>
                 <Link
-                    href={((totalItemsInCart === 0) && loaded) ? "/whislist" : "/whislist"}
+                    href={"/whislist"}
                     className="mx-2">
                     <div className="relative">
                         {
-                            (loaded && totalItemsInCart > 0) && (
+                            (favorites.length > 0) && (
                                 <span className={`${ parFont.className } absolute text-xs rounded-full w-4 h-4 flex items-center justify-center mt-1 font-medium -top-2 -right-2 bg-black text-white`}>
-                                    {/* {totalItemsInCart} */}
-                                    4
+                                    { favorites.length }
                                 </span>
                             )
                         }

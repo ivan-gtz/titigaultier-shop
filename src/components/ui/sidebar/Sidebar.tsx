@@ -1,7 +1,6 @@
 'use client'
 import { Fragment } from 'react';
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
-import { logout } from "@/actions"
 import { useUiStore } from "@/store"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
@@ -12,13 +11,16 @@ import { BsSearch, BsTicketPerforated } from 'react-icons/bs';
 import { Button } from '../ui-shadcn/button';
 import { MdAdminPanelSettings } from "react-icons/md";
 import { parFont } from '@/config/fonts';
+import { signOut } from "next-auth/react"
 
 export const Sidebar = () => {
+    
+    const { data: session, status } = useSession();
     const isSideMenuOpen = useUiStore(state => state.isSideMenuOpen);
     const closeMenu = useUiStore(state => state.closeSideMenu);
-    const { data: session } = useSession();
     const isAdmin = (session?.user.role === 'admin');
     const isAuthenticaed = !!session?.user;
+
     return (
         <Transition show={isSideMenuOpen} as={Fragment}>
             <Dialog as="div" className="fixed inset-0 overflow-y-auto z-50" onClose={closeMenu}>
@@ -107,7 +109,7 @@ export const Sidebar = () => {
                                             {
                                                 isAuthenticaed && (
                                                     <Button
-                                                        onClick={() => logout()}
+                                                        onClick={() => signOut()}
                                                         variant="ghost"
                                                         size="lg"
                                                         className="w-full justify-start px-3 mt-4 text-base font-normal"

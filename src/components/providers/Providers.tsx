@@ -2,6 +2,7 @@
 
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { SessionProvider } from "next-auth/react";
+import { FavoriteSyncHandler } from "../products/whis-list-grid/FavoriteSyncHandler";
 
 interface Props {
     children: React.ReactNode
@@ -16,6 +17,7 @@ export const Providers = ({ children }: Props) => {
         }}>
             <SessionProvider >
                 {children}
+                <FavoriteSyncHandler />
             </SessionProvider>
         </PayPalScriptProvider>
     )

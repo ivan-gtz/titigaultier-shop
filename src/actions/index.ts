@@ -24,3 +24,9 @@ export * from './user/get-paginated-users';
 export * from './user/change-user-role';
 
 export * from './category/get-category';
+
+
+export * from './favorite/add-favorite';
+export * from './favorite/delete-from-favorite';
+export * from './favorite/get-favorites';
+export * from './favorite/sync-favorites';
