@@ -28,8 +28,8 @@ export const  ProductGridItemFav = ({ product }: Props) => {
       </div>
       <Link href={`/product/${product.slug}`}>
         <div className="p-2 flex justify-between">
-          <h3 className={`${parFont.className} text-base font-normal text-gray-800 mb-1 mr-1`}>{ product.title }</h3>
-          <span className={`${parFont.className} font-medium`} >${ product.price }</span>
+          <h3 className={`${parFont.className} text-sm font-normal text-gray-800 mb-1 mr-1`}>{ product.title }</h3>
+          <span className={`${parFont.className} font-medium text-sm slashed-zero tabular-nums`} >${ product.price }</span>
         </div>
       </Link>
     </div>

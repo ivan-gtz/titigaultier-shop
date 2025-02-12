@@ -36,7 +36,7 @@ export const useAddressStore = create<State>()(
         },
         }),
         {
-            name: 'address-information'
+            name: 'address-storage'
         }
     )
 

@@ -87,7 +87,7 @@ export const Pagination = ({ totalPages }: Props) => {
             </div>
             {/* On mobile version */}
             <div className="flex items-center justify-between text-sm text-gray-600 font-medium sm:hidden">
-                <Link href={ createPageUrl( currentPage + 1 ) } className="px-4 py-2 border rounded-lg duration-150 hover:bg-gray-50">Anterior</Link>
+                <Link href={ createPageUrl( currentPage - 1 ) } className="px-4 py-2 border rounded-lg duration-150 hover:bg-gray-50">Anterior</Link>
                 <div className="font-medium">
                     Página {currentPage} de {totalPages}
                 </div>

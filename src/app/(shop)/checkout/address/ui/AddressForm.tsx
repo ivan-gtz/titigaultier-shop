@@ -39,7 +39,6 @@ export const AddressForm = ({countries , userStoredAddress = {}} : Props) => {
     const { data: session } = useSession({
         required: true,
     })
-
     const setAddress = useAddressStore( state => state.setAddress );
     const storeAddress = useAddressStore( state => state.address );
     useEffect(() => {
@@ -49,8 +48,6 @@ export const AddressForm = ({countries , userStoredAddress = {}} : Props) => {
     }, [storeAddress])
 
     const onSubmit = async( data: FormInputs ) => {
-        console.log({data});
-
         const { rememberAddress, ...restAddress } = data;
         await setAddress( restAddress );
 
