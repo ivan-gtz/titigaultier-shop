@@ -1,9 +1,11 @@
 'use client';
 
 import { placeOrder } from "@/actions";
+import { Button } from "@/components";
 import { useAddressStore, useCartStore } from "@/store";
 import { currencyFormatter } from "@/utils";
 import clsx from "clsx";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -87,15 +89,23 @@ export const PlaceOrder = () => {
                 </p>
 
                 <p className="text-red-500">{ errorMessage }</p>
-                <button
+                <Button
+                    disabled={ isPlacingOrder }
                     onClick={ onPlaceOrder }
-                    className={clsx({
-                        'btn-primary': !isPlacingOrder,
-                        'btn-disabled': isPlacingOrder
-                    })}
+                    size="lg"
+                    type="submit"
+                    className="w-full"
                 >
-                    Colocar orden
-                </button>
+                    {
+                        isPlacingOrder ?
+                        <>
+                            <Loader2 size={ 20 } className="animate-spin mr-2" />
+                            Espere por favor 
+                        </> :
+                        "Confirmar pedido"
+
+                    }
+                </Button>
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { Title } from "@/components";
+import { Card, Divider, Title } from "@/components";
 import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
@@ -11,14 +11,20 @@ export default async function ProfilePage() {
     }
 
     return (
-        <>
-            <Title title={"Perfil"} />
-            <pre>
-                {
-                    JSON.stringify( session?.user, null, 2)
-                }
-            </pre>
-            <h3 className="text-3xl mb-5">{ session.user.role }</h3>
-        </>
+        <div className="px-2 sm:px-10">
+            <Card className="mt-5">
+                <h1 className="text-tremor-title font-bold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                    Perfil
+                </h1>
+                <Divider />
+                
+                <h4 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                    inició sesión como:
+                </h4>
+                <p className="mt-1 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+                    { session.user.email }
+                </p>
+            </Card>
+        </div>
     );
 }

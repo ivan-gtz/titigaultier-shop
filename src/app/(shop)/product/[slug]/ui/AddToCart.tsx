@@ -1,5 +1,5 @@
 'use client';
-import { Button, QuantitySelector, SizeSelector } from "@/components"
+import { Button, FavoriteButton, QuantitySelector, SizeSelector } from "@/components"
 import { parFont } from "@/config/fonts";
 import type { CartProduct, Product, Size } from "@/interfaces"
 import { useCartStore, useSlideCartStore } from "@/store";
@@ -61,13 +61,20 @@ export const AddToCart = ({ product }: Props) => {
         onQuantityChanged={setQuantity}
       />
       {/* Button */}
-      <Button
-        onClick={addToCart}
-        size="lg"
-        className={`${ parFont.className } my-5 text-sm font-medium`}
-      >
-        AGREGAR A LA CESTA
-      </Button>
+      <div className="flex justify-between items-start">
+        <Button
+          onClick={addToCart}
+          size="lg"
+          className={`${ parFont.className } my-5 text-sm font-medium w-96 rounded-xl mr-3`}
+        >
+          AGREGAR A LA CESTA
+        </Button>
+        <FavoriteButton 
+          favorite={ product } 
+          className=" p-[11px] my-4 mt-5 border-gray-200"
+          heartClass={ 18 }
+        />
+      </div>
     </>
   )
 }

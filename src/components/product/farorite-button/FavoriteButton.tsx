@@ -8,9 +8,10 @@ import { useSession } from "next-auth/react";
 interface Props {
     favorite: Product;
     className?: string;
+    heartClass?: number;
   }
 
-export const FavoriteButton = ({ favorite, className ='' }: Props) => {
+export const FavoriteButton = ({ favorite, className = '', heartClass = 16 }: Props) => {
 
     const { status } = useSession();
 
@@ -30,7 +31,7 @@ export const FavoriteButton = ({ favorite, className ='' }: Props) => {
             disabled={ loading }
             className={`${className} cursor-pointer bg-white/70 bg-opacity-70 shadow-2xl border border-gray-100 rounded-full outline-offset-0 transition-transform duration-300 hover:scale-110 p-2`}
         >
-            <Heart className={`h-4 w-4 ${isFavorite ? "fill-red-500 text-red-500" : "text-gray-600"}`} />
+            <Heart size={heartClass} className={`${isFavorite ? "fill-red-500 text-red-500" : "text-gray-600"}`} />
             <span className="sr-only">Add to favorites</span>
         </button>
     );
