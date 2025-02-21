@@ -1,5 +1,6 @@
 import { parFont, titleFont } from "@/config/fonts"
 import Link from "next/link"
+import { FaWhatsapp } from "react-icons/fa"
 
 export const Footer = () => {
     return (
@@ -59,7 +60,9 @@ export const Footer = () => {
                                 </li>
 
                                 <li>
-                                    <Link href="#" className="text-black transition hover:opacity-75"> WhatsApp </Link>
+                                    <Link href="#" className="flex items-center gap-1 text-black transition hover:opacity-75"> 
+                                        WhatsApp <FaWhatsapp size={18}/> 
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

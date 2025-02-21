@@ -22,7 +22,7 @@ export const QuantitySelector = ({ quantity, onQuantityChanged, className, size 
 
 
     return (
-        <div className="flex text-base">
+        <div className={`flex text-base ${className}`}>
             <button onClick={ () => onValueChange( -1 )}>
                 <IoRemoveCircleOutline size={ size }/>
             </button>

@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
-import { useFavoriteStore } from "@/store";
+import { useAddressStore, useFavoriteStore } from "@/store";
 
 export const FavoriteSyncHandler = () => {
     const { status } = useSession();
@@ -10,6 +10,7 @@ export const FavoriteSyncHandler = () => {
     const loadFavorites = useFavoriteStore(state => state.loadFavorites);
     const tempFavorites = useFavoriteStore(state => state.tempFavorites);
     const clearTempFavorites = useFavoriteStore(state => state.clearTempFavorites);
+    const resetAddress = useAddressStore(state => state.resetAddress);
 
     useEffect(() => {
         if (status === 'authenticated') {
@@ -20,6 +21,7 @@ export const FavoriteSyncHandler = () => {
             syncFavorites();
         } else if (status === 'unauthenticated' && previousStatus.current === 'authenticated') {
             clearTempFavorites();
+            resetAddress();
         }
         previousStatus.current = status;
     }, [status, tempFavorites.length, syncFavorites, clearTempFavorites]);

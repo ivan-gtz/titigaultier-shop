@@ -40,5 +40,7 @@ export  * from './ui-tremor/ui/Tooltip';
 export  * from './ui-tremor/ui/Card';
 export  * from './ui-tremor/ui/Divider';
 export  * from './ui-tremor/ui/Tabs';
+export  * from './ui-tremor/ui/Input';
+export  * from './ui-tremor/ui/Label';
 export  * from './ui-tremor/visualizations/CategoryBar';
 export  * from './ui-tremor/visualizations/BarChar';

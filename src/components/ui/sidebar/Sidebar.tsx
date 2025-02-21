@@ -1,5 +1,5 @@
 'use client'
-import { Fragment } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
 import { useUiStore } from "@/store"
 import { useSession } from "next-auth/react"
@@ -12,15 +12,28 @@ import { Button } from '../ui-shadcn/button';
 import { MdAdminPanelSettings } from "react-icons/md";
 import { parFont } from '@/config/fonts';
 import { signOut } from "next-auth/react"
+import { useRouter } from 'next/navigation';
 
 export const Sidebar = () => {
     
+    const [searchTerm, setsearchTerm] = useState("");
+
     const { data: session, status } = useSession();
     const isSideMenuOpen = useUiStore(state => state.isSideMenuOpen);
     const closeMenu = useUiStore(state => state.closeSideMenu);
     const isAdmin = (session?.user.role === 'admin');
     const isAuthenticaed = !!session?.user;
 
+    const router = useRouter();
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const onSearchTerm = () => {
+        if (searchTerm.trim().length === 0) return;
+        const trimmedQuery = searchTerm.trim()
+        router.push(`/search/${encodeURIComponent(trimmedQuery)}`);
+        inputRef.current?.blur();
+        closeMenu();
+    }
     return (
         <Transition show={isSideMenuOpen} as={Fragment}>
             <Dialog as="div" className="fixed inset-0 overflow-y-auto z-50" onClose={closeMenu}>
@@ -38,15 +51,15 @@ export const Sidebar = () => {
                 </TransitionChild>
                 <div className="fixed inset-0 overflow-hidden">
                     <div className="absolute inset-0 overflow-hidden">
-                        <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                        <div className="pointer-events-none fixed inset-y-0 left-0 flex max-w-full pr-10">
                             <TransitionChild
                                 as={Fragment}
                                 enter="transform transition ease-in-out duration-500 sm:duration-700"
-                                enterFrom="translate-x-full"
+                                enterFrom="-translate-x-full"
                                 enterTo="translate-x-0"
                                 leave="transform transition ease-in-out duration-500 sm:duration-700"
                                 leaveFrom="translate-x-0"
-                                leaveTo="translate-x-full"
+                                leaveTo="-translate-x-full"
                             >
                                 <DialogPanel className="pointer-events-auto w-screen max-w-sm">
                                     <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
@@ -69,8 +82,17 @@ export const Sidebar = () => {
                                                     <BsSearch className="text-gray-500" size={16} />
                                                 </div>
                                                 <Input
-                                                    className='pl-12 text-base'
+                                                    value={ searchTerm }
+                                                    onChange={(e) => setsearchTerm(e.target.value)}
+                                                    onKeyDown={(e) => {
+                                                        if (e.key === 'Enter') {
+                                                          onSearchTerm();
+                                                          inputRef.current?.blur();
+                                                        }
+                                                      }}
+                                                    type="text"
                                                     placeholder='Buscar...'
+                                                    className='pl-12 text-base'
                                                 />
                                             </div>
                                             {/* Menú */}

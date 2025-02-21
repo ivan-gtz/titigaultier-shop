@@ -5,6 +5,8 @@ export * from './product/get-product-by-slug';
 export * from './product/get-stock-by-slug';
 export * from './product/create-update-product';
 export * from './product/delete-product-image';
+export * from './product/get-product-by-term';
+
 export * from './auth/login';
 export * from './auth/logout';
 export * from './auth/register';

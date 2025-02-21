@@ -1,4 +1,4 @@
-import { buttonVariants, Title } from "@/components";
+import { buttonVariants, Divider, Title } from "@/components";
 import Link from "next/link";
 import { ProductsInCart } from "./ui/ProductsInCart";
 import { OrderSummary } from "./ui/OrderSummary";
@@ -34,7 +34,7 @@ export default function CartPage() {
             <div className={`${parFont.className} col-span-12 sm:col-span-5 w-full`}>
               <div className="bg-white rounded-xl shadow-lg border-slate-100 border-b rounded-t-xl p-4 pb-6">
                 <h2 className="text-slate-900 text-xl">Resumen del pedido</h2>
-                <hr className="mb-2 mt-2" />
+                <Divider />
                 <OrderSummary />
                   <Link
                     href="/checkout/address"

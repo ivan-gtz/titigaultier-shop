@@ -40,9 +40,10 @@ export const ProductsInCart = () => {
                             <Link href={`/product/${ product.slug }`}>
                                 <p>{product.title}</p>
                             </Link>
-                            <p>Talla: <strong className="font-semibold">{ product.size }</strong></p>
+                            <p className="mt-1">Talla: <strong className="font-semibold">{ product.size }</strong></p>
                             <QuantitySelector
                                 onQuantityChanged={quantity => updateProductQuantity(product, quantity)} 
+                                className="mt-2"
                                 quantity={ product.quantity } 
                                 size={25} 
                             />
@@ -52,7 +53,7 @@ export const ProductsInCart = () => {
                             <p>${product.price}</p>
                             <button 
                                 onClick={ () => removeProduct( product ) }
-                                className="text-sm text-blue-800 font-medium"
+                                className="text-sm mt-2 text-blue-800 font-medium cursor-pointer"
                             >
                                 Remover
                             </button>

@@ -1,5 +1,5 @@
 import { getOrderById } from "@/actions/order/get-order-by-id";
-import { OrderStatus, PayPalButton, Title } from "@/components";
+import { Divider, OrderStatus, PayPalButton, Title } from "@/components";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { currencyFormatter } from "@/utils";
@@ -32,7 +32,7 @@ export default async function ProductBySlugPage(props: Props) {
       <div className="flex justify-center items-center mb-72 px-2">
 
         <div className="flex flex-col w-ful">
-          <Title title={`Pedido #${id.split('-').at(-1)}`} />
+          <Title title={`Pedido: #${id.split('-').at(-1)}`} />
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-4" >
 
             {/* Carrito */}
@@ -54,11 +54,11 @@ export default async function ProductBySlugPage(props: Props) {
                         />
                       </div>
                       <div className="col-span-7">
-                        {/* <p>{product.title}</p> */}
+                        <p>{item.product.title}</p>
                         <p>Talla: <strong>L</strong></p>
-                        <p className="text-lg font-semibold">{item.quantity ===1 ? ' 1 producto' : `${item.quantity} productos`}</p>
+                        <p className="text-lg font-semibold slashed-zero tabular-nums">{item.quantity ===1 ? ' 1 producto' : `${item.quantity} productos`}</p>
                       </div>
-                      <div className="col-span-2">
+                      <div className="col-span-2 slashed-zero tabular-nums">
                         <p>{currencyFormatter(item.price)}</p>
                       </div>
                     </div>
@@ -72,31 +72,31 @@ export default async function ProductBySlugPage(props: Props) {
             {/* Order summary */}
             <div className="col-span-12 sm:col-span-5 w-full">
               <div className="bg-white rounded-xl shadow-lg border-slate-100 border-b rounded-t-xl p-4 pb-6">
-                <h2 className="text-slate-900 text-xl">Dirección de entraga</h2>
-                <div className="mb-10">
+                <h2 className="text-slate-900 text-lg font-medium">Dirección de entraga</h2>
+                <div className="mb-10 text-base font-light">
                   <p>{address!.firstName} {address!.lastName}</p>
                   <p>{address!.address}</p>
                   <p>{address!.address2}</p>
                   <p>{address!.postalCode}</p>
-                  <p>{address!.city} {address!.countryId}</p>
+                  <p>{address!.city}, {address!.countryId}</p>
                   <p>{address!.phone}</p>
                 </div>
                 {/* Divider */}
-                <div className="w-full h-0.5 rounded bg-gray-200 mb-10" />
+                <Divider />
 
-                <h2 className="text-slate-900 text-xl flex justify-between">
+                <h2 className="text-slate-900 text-lg flex justify-between font-medium">
                   Resumen del pedido
                 </h2>
 
-                <div className="grid grid-cols-2 mb-2">
+                <div className="grid grid-cols-2 mb-2 text-base font-light slashed-zero tabular-nums">
                   <span>No. Productos</span>
                   <span className="text-right">{order?.itemsInOrder === 1 ? '1 artículo' : `${order?.itemsInOrder} artículos`}</span>
                   <span>Subtotal</span>
                   <span className="text-right">{currencyFormatter(order!.subTotal)}</span>
                   <span>Impuestos (15%)</span>
                   <span className="text-right">{currencyFormatter(order!.tax)}</span>
-                  <span className="text-lg font-semibold text-slate-900 mt-5">Total:</span>
-                  <span className="text-lg font-semibold text-slate-900 text-right mt-5">{currencyFormatter(order!.total)}</span>
+                  <span className="text-lg font-medium text-slate-900 mt-5">Total:</span>
+                  <span className="text-lg font-medium text-slate-900 text-right mt-5">{currencyFormatter(order!.total)}</span>
 
                 </div>
                 {

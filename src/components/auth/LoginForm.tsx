@@ -17,9 +17,12 @@ import { login } from "@/actions/auth/login";
 export const LoginForm = () => {
 
     const searchParams = useSearchParams();
+    console.log(searchParams.get("redirectTo"))
     const urlError = searchParams.get("error") === "OAuthAccountNotLinked"
         ? "¡El correo electrónico ya está en uso con otro proveedor!"
         :"";
+    
+    const redirectTo = searchParams.get("redirectTo") ?? '/';
 
     const [error, setError] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
@@ -40,7 +43,7 @@ export const LoginForm = () => {
                 .then((data) => {
                     if (data?.ok) {
                         // router.push("/");
-                        window.location.replace('/');
+                        window.location.replace(redirectTo);
                     } else {
                         setError(data?.error);
                     }

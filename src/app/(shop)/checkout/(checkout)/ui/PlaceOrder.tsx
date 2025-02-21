@@ -1,7 +1,7 @@
 'use client';
 
 import { placeOrder } from "@/actions";
-import { Button } from "@/components";
+import { Button, Divider } from "@/components";
 import { useAddressStore, useCartStore } from "@/store";
 import { currencyFormatter } from "@/utils";
 import clsx from "clsx";
@@ -31,10 +31,20 @@ export const PlaceOrder = () => {
             productId: product.id,
             quantity: product.quantity,
             size: product.size,
-        }))
-
+        }));
+        
+        const restAddress = {
+            firstName: address.firstName,
+            lastName: address.lastName,
+            address: address.address,
+            address2: address.address2,
+            postalCode: address.postalCode,
+            city: address.city,
+            country: address.country,
+            phone: address.phone,
+        }
         //! Server Action
-        const resp = await placeOrder( productsToOrder, address );
+        const resp = await placeOrder( productsToOrder, restAddress );
         if ( !resp.ok ) {
             setIsPlacingOrder(false);
             setErrorMessage(resp.message);
@@ -52,7 +62,7 @@ export const PlaceOrder = () => {
 
     return (
         <div className="bg-white rounded-xl shadow-lg border-slate-100 border-b rounded-t-xl p-4 pb-6">
-            <h2 className="text-slate-900 text-xl">Dirección de entraga</h2>
+            <h2 className="text-slate-900 text-lg font-semibold">Dirección de entraga</h2>
             <div className="mb-10">
                 <p>{ address.firstName } { address.lastName }</p>
                 <p>{ address.address }</p>
@@ -62,15 +72,22 @@ export const PlaceOrder = () => {
                 <p>{ address.phone }</p>
             </div>
             {/* Divider */}
-            <div className="w-full h-0.5 rounded bg-gray-200 mb-10" />
+            <Divider />
 
-            <h2 className="text-slate-900 text-xl flex justify-between">
+            <h2 className="text-slate-900 text-lg font-semibold flex justify-between">
                 Resumen del pedido
-                <Link href="/cart" className="text-base">Editar</Link>
+                <Button
+                    size="sm"
+                    variant="link"
+                    asChild
+                    className="px-0 font-semibold text-base"
+                >
+                    <Link href="/cart">Editar</Link>
+                </Button>
             </h2>
 
-            <div className="grid grid-cols-2">
-           <span>No. Productos</span>
+            <div className="grid grid-cols-2 slashed-zero tabular-nums">
+                <span>No. Productos</span>
                 <span className="text-right">{ itemsInCart === 1 ? '1 artículo': `${ itemsInCart } artículos`}</span>
                 <span>Subtotal</span>
                 <span className="text-right">{ currencyFormatter( subTotal )  }</span>
