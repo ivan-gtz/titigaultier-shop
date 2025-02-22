@@ -24,8 +24,13 @@ export default async function ProductBySlugPage(props: Props) {
   }
   const address = order!.OrderAddress;
 
-
-
+  //refactorizar
+  const getImageUrl = (imagePath: string) => {
+    if (imagePath.startsWith('http')) {
+      return imagePath;
+    }
+    return `/products/${imagePath}`;
+  };
 
   return (
     <div className="px-2 sm:px-10">
@@ -37,7 +42,7 @@ export default async function ProductBySlugPage(props: Props) {
 
             {/* Carrito */}
             <div className="col-span-12 sm:col-span-7 w-full">
-              <OrderStatus isPaid={ order?.isPaid ?? false } />
+              <OrderStatus isPaid={order?.isPaid ?? false} />
               <div className="flex flex-col mt-5">
                 {/* Items */}
                 {
@@ -45,7 +50,7 @@ export default async function ProductBySlugPage(props: Props) {
                     <div key={item.product.slug + '-' + item.size} className="grid grid-cols-12 gap-2 mb-3 items-start w-full">
                       <div className="col-span-3">
                         <Image
-                          src={`/products/${item.product.ProductImage[0].url}`}
+                          src={getImageUrl(item.product.ProductImage[0].url)}
                           width={150}
                           height={150}
                           className="rounded-md"
@@ -56,7 +61,7 @@ export default async function ProductBySlugPage(props: Props) {
                       <div className="col-span-7">
                         <p>{item.product.title}</p>
                         <p>Talla: <strong>L</strong></p>
-                        <p className="text-lg font-semibold slashed-zero tabular-nums">{item.quantity ===1 ? ' 1 producto' : `${item.quantity} productos`}</p>
+                        <p className="text-lg font-semibold slashed-zero tabular-nums">{item.quantity === 1 ? ' 1 producto' : `${item.quantity} productos`}</p>
                       </div>
                       <div className="col-span-2 slashed-zero tabular-nums">
                         <p>{currencyFormatter(item.price)}</p>
@@ -100,10 +105,10 @@ export default async function ProductBySlugPage(props: Props) {
 
                 </div>
                 {
-                  order?.isPaid ?(
-                    <OrderStatus isPaid={ order?.isPaid ?? false } />
-                  ):(
-                    <PayPalButton orderId={ order!.id } amount={ order!.total } />
+                  order?.isPaid ? (
+                    <OrderStatus isPaid={order?.isPaid ?? false} />
+                  ) : (
+                    <PayPalButton orderId={order!.id} amount={order!.total} />
                   )
                 }
 
