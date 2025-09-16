@@ -2,13 +2,28 @@
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { CreateOrderData, CreateOrderActions, OnApproveData, OnApproveActions } from "@paypal/paypal-js";
 import { paypalCheckPayment, setTransactionId } from "@/actions";
+import { Address } from "@/interfaces";
+
+interface AddressPayment {
+    email: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+    address2?: string;
+    selectedCountry: string;
+    city: string;
+    postalCode: string;
+    phone: string;
+    countryCode: string;
+}
 
 interface Props {
   orderId: string;
   amount: number;
+  addressPayment: AddressPayment
 }
 
-export const PayPalButton = ({ orderId, amount }: Props) => {
+export const PayPalButton = ({ orderId, amount, addressPayment }: Props) => {
   const [{ isPending }] = usePayPalScriptReducer();
 
   const roundedAmount = (Math.round(amount * 100)) / 100; //redondeo a 2 decimales
@@ -33,7 +48,22 @@ export const PayPalButton = ({ orderId, amount }: Props) => {
             currency_code: 'USD',
           }
         }
-      ]
+      ],
+      payer: {
+        email_address: `${ addressPayment.email }`,
+        name: {
+          given_name: `${ addressPayment.firstName }`,
+          surname: `${ addressPayment.lastName }`
+        },
+        address: {
+          address_line_1: `${ addressPayment.address }`,
+          address_line_2: `${ addressPayment.address2 }`,
+          admin_area_2: `${ addressPayment.city }`,
+          admin_area_1: `${ addressPayment.selectedCountry }`,
+          postal_code: `${ addressPayment.postalCode }`,
+          country_code: `${ addressPayment.countryCode }`,
+        }
+      }
     });
     // console.log({transactionId});
     const { ok } = await setTransactionId(orderId, transactionId);
