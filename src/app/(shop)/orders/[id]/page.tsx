@@ -17,15 +17,25 @@ export default async function ProductBySlugPage(props: Props) {
 
   const { id } = params;
   // todo: llamar el server action
-  const { ok, order } = await getOrderById(id);
+  const { ok, order, email } = await getOrderById(id);
 
   if (!ok) {
     redirect('/');
   }
   const address = order!.OrderAddress;
 
-
-
+  const AddressPayment = {
+    email: email!,
+    firstName: address!.firstName,
+    lastName: address!.lastName,
+    address: address!.address, 
+    address2: address!.address2 || '',
+    selectedCountry: address!.country.name,
+    city: address!.city,
+    postalCode: address!.postalCode,
+    phone: address!.phone,
+    countryCode: address!.countryId
+  }
 
   return (
     <div className="px-2 sm:px-10">
@@ -103,7 +113,10 @@ export default async function ProductBySlugPage(props: Props) {
                   order?.isPaid ?(
                     <OrderStatus isPaid={ order?.isPaid ?? false } />
                   ):(
-                    <PayPalButton orderId={ order!.id } amount={ order!.total } />
+                    <PayPalButton 
+                        orderId={order!.id}
+                        amount={order!.total} 
+                        addressPayment={ AddressPayment }/>
                   )
                 }
 
