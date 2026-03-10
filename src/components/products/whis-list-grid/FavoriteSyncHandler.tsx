@@ -24,6 +24,6 @@ export const FavoriteSyncHandler = () => {
             resetAddress();
         }
         previousStatus.current = status;
-    }, [status, tempFavorites.length, syncFavorites, clearTempFavorites]);
+    }, [status, tempFavorites.length, syncFavorites, clearTempFavorites, loadFavorites, resetAddress]);
     return null;
 }

@@ -29,13 +29,16 @@ export default async function SearchPage(props: Props) {
   const query = params.query;
   const decodedTerm = decodeURIComponent(query);
   const products = await getProductByTerm(decodedTerm);
-  console.log({products})
+
+  const titleText = `Búsqueda: ${decodedTerm} | TitiGaultier`;
+  const subtitleText = `Resultados de búsqueda para "${decodedTerm}"`;
+
   if ( products.length === 0 ) {
     return (
       <div className="min-h-[500px] flex flex-col items-center justify-center gap-4 px-4">
         <h1 className={`${parFont.className} text-2xl text-center`}>
           No encontramos resultados para <br/> 
-          <span className="font-bold">"{decodedTerm}"</span>
+          <span className="font-bold">&quot;{decodedTerm}&quot;</span>
         </h1>
       </div>
     )
@@ -43,8 +46,8 @@ export default async function SearchPage(props: Props) {
   return (
     <div className="px-2 sm:px-10">
         <Title 
-          title={`Búsqueda: ${decodedTerm} | TitiGaultier`}
-          subtitle={`Resultados de búsqueda para "${decodedTerm}"`}
+          title={titleText}
+          subtitle={subtitleText}
           className="mb-2"
         />
         <Divider />
